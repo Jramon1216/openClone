@@ -207,8 +207,6 @@ export default function TopFiveGames() {
                     <li key={index}>
                         <p>{game.name}</p>
                         <p>{game.tier}</p>
-                        <p>{game.images.banner?.sm}</p>
-                        
                         <p>
                             {game.Platforms.map(p=> p.shortName).join(", ")}
                         </p>

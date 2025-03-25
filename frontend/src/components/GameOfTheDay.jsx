@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 
-/**
- *  TODO: turn this component from game of the day to featured game
- *
- */
-
 export default function GameOfTheDay() {
   const [game, setGame] = useState({});
 

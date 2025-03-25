@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query"
 import {GameOfTheDay, TopFiveGames, PopularGames} from "./components"
-
+import './styles'
 
 export default function OpenClone() {
 

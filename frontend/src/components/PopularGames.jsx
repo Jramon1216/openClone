@@ -177,9 +177,6 @@ export default function PopularGames(){
               <p>
                 {popularGame.platforms.join(", ")}
               </p>
-              <p>
-                {popularGame.boxart}
-              </p>
             </li>
           ))}
         </ul>
