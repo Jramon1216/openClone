@@ -8,10 +8,7 @@ import moment from "moment";
  */
 
 export default function GameOfTheDay() {
-  const [title, setTitle] = useState("");
-  const [firstReleaseDate, setFirstReleaseDate] = useState("");
-  const [platforms, setPlatforms] = useState([]);
-  const [boxart, setBoxart] = useState("");
+  const [game, setGame] = useState({});
 
   const data = {
     name: "Hades",
@@ -26,12 +23,9 @@ export default function GameOfTheDay() {
       "Xbox Series X/S",
     ],
   };
-    useEffect(()=>{
-        setTitle(data.name)
-        setFirstReleaseDate(
-            moment(data.firstReleaseDate).format('MMMM Do YYYY')
-        )
-        setPlatforms(data.Platforms)
+
+  useEffect(()=>{
+    setGame(data)      
     },[])
 
   // const fetchGOTD = async() => {
@@ -53,14 +47,11 @@ export default function GameOfTheDay() {
 
   return (
     <>
-      <h1 >Featured Game</h1>
-      <p>{title}</p>
-      <p>Released: {firstReleaseDate}</p>
-      <ul> Available On
-        {platforms.map((platform, index) => (
-          <li key={index}>{platform}</li>
-        ))}
-      </ul>
+      <h1> Featured Game </h1>
+      <h3>{game.name}</h3>
+      <h4>Released on: {moment(game.firstReleaseDate).format('MMMM Do YYYY')}</h4>
+      <h4>Tier: {game.tier}</h4>
+      <h4>Available On: {game.Platforms.join(", ")} </h4>
     </>
   );
 }
