@@ -107,6 +107,8 @@ async def get_popular_games() -> List[PopGame]:
         logger.warning("failed to fetch popular games")
         raise HTTPException(status_code=500, detail=f"Internal Server error: {e}")
 
+
+# TODO: change endpoint name to featured game
 @app.get("/game-of-the-day", response_model=GOTD)
 async def get_game_of_day() -> GOTD:
     try:

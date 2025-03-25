@@ -74,7 +74,7 @@ class PopGame(BaseModel): # Model for the /popular endpoint
     platforms: List[str] 
     boxart: str 
 
-class GOTD(BaseModel):
+class GOTD(BaseModel): #TODO: add banner image to model
     name: str
     first_release_date: datetime = Field(alias=aliases["first_release_date"])
     tier: Tier
