@@ -1,11 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from dotenv import load_dotenv
 from typing import List, Mapping
-from models import HoFGame, PopGame, GOTD
-from example_data_rr import data
+from models import HoFGame, PopGame, GOTD, Game
 
 import os
-import httpx
 import logging
 import requests
 import random
@@ -13,6 +11,18 @@ import random
 load_dotenv()
 
 app = FastAPI(debug=True)
+
+# logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("app.log"),  # Log to file
+        logging.StreamHandler()         # Log to console
+    ]
+)
+
+logger = logging.getLogger(__name__) 
 
 # Resources
 RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY")
@@ -30,9 +40,7 @@ endpoints = {
     "recently released": "/game/recently-released"
 }
 
-client = httpx.AsyncClient()
-
-# helper function to call external API
+# helper function to communicate with external API
 async def get_data(endpoint: str, query_string: Mapping[str, str] = {}):
     if endpoint is None:
         raise ValueError('an valid endpoint is required for this function')
@@ -54,18 +62,22 @@ async def get_data(endpoint: str, query_string: Mapping[str, str] = {}):
 async def get_top_five() -> List[HoFGame]:
     
     try:
+        logger.info("Making call to external API...")
         hof_games = await get_data(endpoints["hall of fame"])
         return hof_games[:5] # Return a list with the top five games          
     
     except Exception as e:
+        logger.warning("Failed to get top five games")
         raise HTTPException(status_code=500, detail=f'Internal server error: {e}')
 
 @app.get("/popular-games", response_model=list[PopGame])
 async def get_popular_games() -> List[PopGame]:
     try:
+        logger.info("Making call to external API...")
         pop_games = await get_data(endpoints["popular"])
         transformed_data = []
 
+        logger.info("transforming data...")
         for game in pop_games:
             transformed = {
                 "name": game["name"],
@@ -79,6 +91,7 @@ async def get_popular_games() -> List[PopGame]:
         return transformed_data
         
     except Exception as e:
+        logger.warning("failed to fetch popular games")
         raise HTTPException(status_code=500, detail=f"Internal Server error: {e}")
 
 @app.get("/game-of-the-day", response_model=GOTD)
@@ -95,6 +108,7 @@ async def get_game_of_day() -> GOTD:
         return game
 
     except Exception as e:
+        logger.warning("failed to fetch game of the day")
         raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
     
     
