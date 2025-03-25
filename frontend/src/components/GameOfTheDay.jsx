@@ -53,10 +53,10 @@ export default function GameOfTheDay() {
 
   return (
     <>
-      <h1 >Game of the day</h1>
+      <h1 >Featured Game</h1>
       <p>{title}</p>
-      <p>{firstReleaseDate}</p>
-      <ul>
+      <p>Released: {firstReleaseDate}</p>
+      <ul> Available On
         {platforms.map((platform, index) => (
           <li key={index}>{platform}</li>
         ))}
