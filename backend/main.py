@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from typing import List, Mapping
 from models import HoFGame, PopGame, GOTD, Game
@@ -11,6 +12,18 @@ import random
 load_dotenv()
 
 app = FastAPI(debug=True)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        f"{os.getenv("LOCAL_HOST")}",
+        f"{os.getenv("SERVER")}"
+                   ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+
 
 # logging
 logging.basicConfig(
