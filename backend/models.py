@@ -46,7 +46,7 @@ class Platform(BaseModel):
     short_name: str = Field(alias = aliases["short_name"])
 
 
-class Game(BaseModel): # Base model for the ROOT object
+class Game(BaseModel): # Root object
     first_release_date: datetime = Field(alias = aliases["first_release_date"])
     id: int
     images: Images
@@ -56,6 +56,10 @@ class Game(BaseModel): # Base model for the ROOT object
     tier: Tier
     top_critic_score: int = Field(alias = aliases["top_critic_score"])
 
+"""
+ ~~~~~~~~~~~~~~~~~~~~~~~~  vv Models for path operation functions vv ~~~~~~~~~~~~~~~~~~~~~~~~
+"""
+
 class HoFGame(BaseModel): # Model for the /hall-of-fame endpoint
     name: str
     id: int
@@ -64,6 +68,9 @@ class HoFGame(BaseModel): # Model for the /hall-of-fame endpoint
     platforms: List[Platform] = Field(alias  = aliases["platforms"])
     top_critic_score: int = Field(alias = aliases["top_critic_score"]) #top score
 
-class Popular(BaseModel):
+class PopGame(BaseModel): # Model for the /popular endpoint
     name: str
-    top_critic_score: int = Field(alias = aliases["top_critic_score"])
+    top_critic_score: int  
+    platforms: List[str] 
+    boxart: str 
+    
