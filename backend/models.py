@@ -1,7 +1,7 @@
 """
 - These models are made to validate JSON responses 
 - Game is the root object
-- If a model contains a field that is also a class a model must be made to support it
+- If a model contains a field that is also an object  a model must be made to support it
 """
 
 from typing import List, Optional
@@ -64,13 +64,19 @@ class HoFGame(BaseModel): # Model for the /hall-of-fame endpoint
     name: str
     id: int
     tier: Tier
-    images: Images # box art
+    images: Images 
     platforms: List[Platform] = Field(alias  = aliases["platforms"])
-    top_critic_score: int = Field(alias = aliases["top_critic_score"]) #top score
+    top_critic_score: int = Field(alias = aliases["top_critic_score"]) 
 
 class PopGame(BaseModel): # Model for the /popular endpoint
     name: str
     top_critic_score: int  
     platforms: List[str] 
     boxart: str 
-    
+
+class GOTD(BaseModel):
+    name: str
+    first_release_date: datetime = Field(alias=aliases["first_release_date"])
+    tier: Tier
+    platforms: List[str] = Field(alias=aliases["platforms"])
+
