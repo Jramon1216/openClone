@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query"
 import {GameOfTheDay, TopFiveGames, PopularGames} from "./components"
-import './styles'
+import './styles/openCloneStyle.css'
 
 export default function OpenClone() {
 
@@ -16,7 +16,9 @@ export default function OpenClone() {
 
     return(
         <>
-            <GameOfTheDay/>
+            <div id="gotd-container">
+                <GameOfTheDay/>
+            </div>
             <hr/>
             <TopFiveGames/>
             <hr/>

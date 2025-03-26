@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "../styles/topFiveGamesStyle.css"
 
 export default function TopFiveGames() {
     const [games, setGames] = useState([]);
@@ -201,23 +202,25 @@ export default function TopFiveGames() {
   return (
     <>
         <h1>Top five highly rated games this year</h1>
-        <ul>
-            {
-                games.map((game, index) => (
-                    <li key={index}>
-                        <p>{game.name}</p>
-                        <p>{game.tier}</p>
-                        <p>
-                            {game.Platforms.map(p=> p.shortName).join(", ")}
-                        </p>
-                        
-                        <p>
-                            {game.topCriticScore}
-                        </p>
-                    </li>
-                ))
-            }
-        </ul>
+        <div>
+          <ul id="top-five-container">
+              {
+                  games.map((game, index) => (
+                      <li key={index} className="top-five-game">
+                          <p>{game.name}</p>
+                          <p>{game.tier}</p>
+                          <p>
+                              {game.Platforms.map(p=> p.shortName).join(", ")}
+                          </p>
+                          
+                          <p>
+                              {game.topCriticScore}
+                          </p>
+                      </li>
+                  ))
+              }
+          </ul>
+        </div>
     </>
   );
 }
