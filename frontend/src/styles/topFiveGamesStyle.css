@@ -1,0 +1,18 @@
+#top-five-container{
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-five-game {
+    background: 
+        linear-gradient(135deg, rgba(255, 215, 0, 0.7), rgba(211, 143, 97, 0.825));
+    border: solid black;
+    width: 150px;
+    height: 200px;
+    padding-left: 5px;
+}
