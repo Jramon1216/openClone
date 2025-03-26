@@ -15,8 +15,8 @@ app = FastAPI(debug=True)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        f"{os.getenv('SERVER')}",
-        f"{os.getenv('FRONTEND_URL')}"
+        {os.getenv('SERVER')},
+        {os.getenv('FRONTEND_URL')}
                    ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -43,8 +43,8 @@ RAPIDAPI_HOST = os.getenv("RAPIDAPI_HOST")
 url = f"https://{RAPIDAPI_HOST}"
 
 headers = {
-	"x-rapidapi-key": f"{RAPIDAPI_KEY}",
-	"x-rapidapi-host": f"{RAPIDAPI_HOST}"
+	"x-rapidapi-key": {RAPIDAPI_KEY},
+	"x-rapidapi-host": {RAPIDAPI_HOST}
     }
 
 endpoints = {
