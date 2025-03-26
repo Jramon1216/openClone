@@ -14,10 +14,7 @@ load_dotenv()
 app = FastAPI(debug=True)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        {os.getenv('SERVER')},
-        {os.getenv('FRONTEND_URL')}
-                   ],
+    allow_origins=['*'], # Couldn't figure out cors in time :(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
@@ -43,8 +40,8 @@ RAPIDAPI_HOST = os.getenv("RAPIDAPI_HOST")
 url = f"https://{RAPIDAPI_HOST}"
 
 headers = {
-	"x-rapidapi-key": {RAPIDAPI_KEY},
-	"x-rapidapi-host": {RAPIDAPI_HOST}
+	"x-rapidapi-key": f"{RAPIDAPI_KEY}",
+	"x-rapidapi-host": f"{RAPIDAPI_HOST}"
     }
 
 endpoints = {
@@ -125,5 +122,4 @@ async def get_game_of_day() -> GOTD:
     except Exception as e:
         logger.warning("failed to fetch game of the day")
         raise HTTPException(status_code=500, detail=f"Internal server error: {e}")
-    
     
