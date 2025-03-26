@@ -16,6 +16,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         f"{os.getenv('SERVER')}",
+        f"{os.getenv('FRONTEND_URL')}"
                    ],
     allow_credentials=True,
     allow_methods=["*"],
