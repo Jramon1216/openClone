@@ -15,10 +15,10 @@ export default function GameOfTheDay() {
   });
 
   const fetchGOTD = async() => {
-      const url = apiURL +"/top-five"
+      const url = apiURL +"/game-of-the-day"
       try {
         const response = await axios.get(url);
-        console.log(response.data)
+        setGame(response.data)
       } catch(e) {
           throw new Error(`Error fetching from openClone API: ${e}`)
       }
