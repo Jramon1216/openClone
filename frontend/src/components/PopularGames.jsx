@@ -180,7 +180,7 @@ export default function PopularGames() {
       <p>Based on pageviews and recent reviews on the OpenCritic website</p>
       <ul id= "pop-ul">
         {popularGames.map((popularGame, index) => (
-          <li id="pop-li">
+          <li id="pop-li" key={index}>
             <div id="popular-game-container">
               <div id="critic-score-container">
                 <p

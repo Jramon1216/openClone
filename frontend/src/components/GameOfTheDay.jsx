@@ -3,6 +3,7 @@ import axios from "axios";
 import moment from "moment";
 import '../styles/gameOfTheDayStyle.css'
 
+const apiURL = import.meta.env.VITE_API_URL
 // TODO: change naming of function from GameOfTheDay to Featured Game
 
 export default function GameOfTheDay() {
@@ -13,40 +14,19 @@ export default function GameOfTheDay() {
     Platforms: [],
   });
 
-  const data = {
-    name: "Hades",
-    firstReleaseDate: "2020-09-17T00:00:00Z",
-    tier: "Mighty",
-    Platforms: [
-      "PC",
-      "Nintendo Switch",
-      "PlayStation 4",
-      "PlayStation 5",
-      "Xbox One",
-      "Xbox Series X/S",
-    ],
-  };
-
-  useEffect(()=>{
-    setGame(data)      
-    },[])
-
-  // const fetchGOTD = async() => {
-  //     const url = "http://127.0.0.1:8000/game-of-the-day"
-  //     try {
-  //         axios.get(url)
-  //         .then((response) =>
-  //             console.log(response.data)
-
-  //         )
-
-  //     } catch(e) {
-  //         throw new Error(`Error fetching from openClone API: ${e}`)
-  //     }
-  // }
-  // useEffect(() => {
-  //     fetchGOTD()
-  // }, [])
+  const fetchGOTD = async() => {
+      const url = apiURL +"/top-five"
+      try {
+        const response = await axios.get(url);
+        console.log(response.data)
+      } catch(e) {
+          throw new Error(`Error fetching from openClone API: ${e}`)
+      }
+  }
+  
+  useEffect(() => {
+      fetchGOTD()
+  }, [])
 
   return (
     <div id="game-card">
